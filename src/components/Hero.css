@@ -1,0 +1,725 @@
+
+html {
+    overflow-y: scroll;
+  }
+  
+  .hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 50%, #ffd4eb 100%);
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .bloom-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 30px;
+    padding: 40px;
+    width: 900px;
+    max-width: calc(100vw - 40px);
+    box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
+    border: 3px solid rgba(255, 192, 203, 0.5);
+    box-sizing: border-box;
+  }
+  
+  .bloom-title {
+    font-size: 2.5rem;
+    text-align: center;
+    background: linear-gradient(45deg, #ff6ec7, #ff9ed8, #ffb7e8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  
+  .bloom-subtitle {
+    text-align: center;
+    color: #ff6ec7;
+    font-size: 1rem;
+    margin-bottom: 30px;
+    font-weight: 500;
+  }
+  
+  .bloom-main-content {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .bloom-todo-section {
+    width: 380px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  
+  .bloom-todo-item {
+    background: linear-gradient(135deg, #fff5fa 0%, #ffe9f5 100%);
+    padding: 18px 20px;
+    border-radius: 15px;
+    border: 2px solid #ffd4eb;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  
+  .bloom-todo-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
+    border-color: #ffb7e8;
+  }
+  
+  .bloom-delete-btn {
+    background: transparent;
+    border: none;
+    color: #ff9ed8;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+    margin-left: 10px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  
+  .bloom-todo-item:hover .bloom-delete-btn {
+    opacity: 1;
+  }
+  
+  .bloom-delete-btn:hover {
+    background: #ffe9f5;
+    color: #ff6ec7;
+    transform: scale(1.1);
+  }
+  
+  .bloom-add-item {
+    background: linear-gradient(135deg, #ffffff 0%, #fff5fa 100%);
+    border-radius: 15px;
+    border: 2px solid #ffd4eb;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 0;
+    padding: 0 20px;
+    border-width: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.2s ease, border-width 0.3s ease;
+  }
+  
+  .bloom-add-item--open {
+    max-height: 160px;
+    padding: 20px;
+    border-width: 2px;
+    opacity: 1;
+  }
+  
+  .bloom-todo-input {
+    width: 100%;
+    border: 2px solid #ffd4eb;
+    border-radius: 10px;
+    padding: 12px 15px;
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+    box-sizing: border-box;
+  }
+  
+  .bloom-todo-input:focus {
+    border-color: #ff9ed8;
+    box-shadow: 0 0 0 3px rgba(255, 158, 216, 0.15);
+  }
+  
+  .bloom-todo-input::placeholder {
+    color: #ffb7e8;
+  }
+  
+  .bloom-add-actions {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .bloom-save-btn,
+  .bloom-cancel-btn {
+    flex: 1;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .bloom-save-btn {
+    background: linear-gradient(135deg, #ff6ec7, #ff9ed8);
+    color: white;
+  }
+  
+  .bloom-save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
+  }
+  
+  .bloom-cancel-btn {
+    background: #f5f5f5;
+    color: #999;
+  }
+  
+  .bloom-cancel-btn:hover {
+    background: #e0e0e0;
+    transform: translateY(-2px);
+  }
+  
+  .bloom-add-btn {
+    background: linear-gradient(135deg, #ff6ec7 0%, #ff9ed8 100%);
+    border: none;
+    border-radius: 15px;
+    padding: 18px 20px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+    box-sizing: border-box;
+  }
+  
+  .bloom-add-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+  }
+  
+  .bloom-plus-icon {
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1;
+  }
+  
+  .bloom-empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #ff9ed8;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  
+  .bloom-empty-state p {
+    animation: pulse 2s ease-in-out infinite;
+  }
+  
+  .bloom-empty-subtext {
+    font-size: 0.9rem;
+    color: #ffb7e8;
+    margin-top: 8px;
+    animation: none !important;
+  }
+  
+  .bloom-max-reached {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #fff5fa 0%, #ffe9f5 100%);
+    border-radius: 15px;
+    border: 2px solid #ffd4eb;
+  }
+  
+  .bloom-max-reached p {
+    color: #ff6ec7;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  
+  .bloom-max-subtext {
+    font-size: 0.9rem;
+    color: #ff9ed8;
+    margin-top: 5px;
+    font-weight: 500;
+  }
+  
+  .bloom-task-counter {
+    text-align: center;
+    color: #ff9ed8;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 8px 15px;
+    background: linear-gradient(135deg, #fff5fa 0%, #ffe9f5 100%);
+    border-radius: 20px;
+    border: 2px solid #ffd4eb;
+  }
+  
+  .bloom-clear-btn {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    border: none;
+    border-radius: 15px;
+    padding: 18px 20px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+    animation: celebrationPulse 2s ease-in-out infinite;
+  }
+  
+  .bloom-clear-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
+  }
+  
+  @keyframes celebrationPulse {
+    0%, 100% { box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4); }
+    50%       { box-shadow: 0 4px 25px rgba(255, 193, 7, 0.6); }
+  }
+  
+  .bloom-sparkle-icon {
+    font-size: 1.2rem;
+    animation: sparkleRotate 3s ease-in-out infinite;
+  }
+  
+  @keyframes sparkleRotate {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    50%       { transform: rotate(180deg) scale(1.2); }
+  }
+  
+  .bloom-checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .bloom-checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .bloom-checkmark {
+    height: 24px;
+    width: 24px;
+    min-width: 24px;
+    background-color: white;
+    border: 2.5px solid #ff9ed8;
+    border-radius: 6px;
+    margin-right: 15px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  
+  .bloom-checkbox-container:hover .bloom-checkmark {
+    background-color: #fff5fa;
+    border-color: #ff6ec7;
+  }
+  
+  .bloom-checkbox-container input:checked ~ .bloom-checkmark {
+    background: linear-gradient(135deg, #ff6ec7, #ff9ed8);
+    border-color: #ff6ec7;
+  }
+  
+  .bloom-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 7px;
+    top: 3px;
+    width: 6px;
+    height: 11px;
+    border: solid white;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+  }
+  
+  .bloom-checkbox-container input:checked ~ .bloom-checkmark:after {
+    display: block;
+  }
+  
+  .bloom-todo-text {
+    font-size: 1rem;
+    color: #333;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .bloom-todo-text.completed {
+    text-decoration: line-through;
+    color: #999;
+    opacity: 0.7;
+  }
+  
+  .bloom-flower-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, #fff8fc 0%, #ffe9f5 100%);
+    padding: 25px;
+    border-radius: 20px;
+    border: 3px solid #ffd4eb;
+    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.15);
+    min-height: 360px;
+    justify-content: center;
+  }
+  
+  .bloom-flower-container svg {
+    filter: drop-shadow(0 5px 10px rgba(255, 105, 180, 0.2));
+    transition: filter 0.5s ease;
+  }
+  .bloom-flower-container:has(.fly-to-garden) svg,
+  .bloom-stage-5 svg {
+    filter: drop-shadow(0 0 18px rgba(255, 200, 50, 0.5))
+            drop-shadow(0 5px 10px rgba(255, 105, 180, 0.2));
+  }
+  
+  .fly-to-garden {
+    animation: flyToGarden 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    transform-origin: center bottom;
+  }
+  
+  @keyframes flyToGarden {
+    0%   { transform: scale(1) translateY(0) rotate(0deg); opacity: 1; }
+    40%  { transform: scale(1.05) translateY(-30px) rotate(-5deg); opacity: 1; }
+    100% { transform: scale(0.35) translateY(220px) translateX(80px) rotate(20deg); opacity: 0; }
+  }
+  
+  @keyframes stagePop {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.04); }
+    100% { transform: scale(1); }
+  }
+  
+  .bloom-flower-container svg circle[r="120"],
+  .bloom-flower-container svg circle[r="85"],
+  .bloom-flower-container svg circle[r="55"] {
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+  
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.45; r: 110px; }
+    50%       { opacity: 0.65; r: 125px; }
+  }
+  
+  .bloom-sparkle {
+    animation: sparkleFloat 2.2s ease-in-out infinite;
+  }
+  
+  @keyframes sparkleFloat {
+    0%, 100% { opacity: 1; transform: translateY(0) scale(1); }
+    50%       { opacity: 0.5; transform: translateY(-6px) scale(1.1); }
+  }
+  
+  .bloom-progress-text {
+    margin-top: 14px;
+    color: #c05a9a;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.3px;
+    transition: all 0.4s ease;
+  }
+  
+  
+
+  .bloom-garden {
+    background: linear-gradient(to bottom, #87CEEB 0%, #B0E2FF 40%, #98D8C8 70%, #7CB342 100%);
+    padding: 0;
+    border-radius: 20px;
+    border: 3px solid #5a8f3a;
+    box-shadow: 0 10px 30px rgba(108, 189, 99, 0.15);
+    overflow: hidden;
+    position: relative;
+    min-height: 400px;
+  }
+  
+  .bloom-sky {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 40%;
+    background: linear-gradient(to bottom, #87CEEB, #B0E2FF);
+    z-index: 0;
+  }
+  
+  .bloom-clouds {
+    position: absolute;
+    top: 20px; left: 0; right: 0;
+    height: 100px;
+    z-index: 1;
+  }
+  
+  .bloom-cloud {
+    position: absolute;
+    background: white;
+    border-radius: 100px;
+    opacity: 0.7;
+    animation: floatCloud 20s ease-in-out infinite;
+  }
+  
+  .bloom-cloud::before,
+  .bloom-cloud::after {
+    content: '';
+    position: absolute;
+    background: white;
+    border-radius: 100px;
+  }
+  
+  .bloom-cloud1 { width: 80px; height: 30px; top: 20px; left: 10%; animation-delay: 0s; }
+  .bloom-cloud1::before { width: 40px; height: 40px; top: -20px; left: 10px; }
+  .bloom-cloud1::after  { width: 50px; height: 35px; top: -15px; right: 10px; }
+  
+  .bloom-cloud2 { width: 100px; height: 35px; top: 40px; right: 15%; animation-delay: -7s; }
+  .bloom-cloud2::before { width: 50px; height: 45px; top: -25px; left: 15px; }
+  .bloom-cloud2::after  { width: 60px; height: 40px; top: -20px; right: 15px; }
+  
+  .bloom-cloud3 { width: 70px; height: 28px; top: 55px; left: 50%; animation-delay: -14s; }
+  .bloom-cloud3::before { width: 35px; height: 35px; top: -18px; left: 12px; }
+  .bloom-cloud3::after  { width: 45px; height: 32px; top: -16px; right: 12px; }
+  
+  @keyframes floatCloud {
+    0%, 100% { transform: translateX(0); }
+    50%       { transform: translateX(30px); }
+  }
+  
+  .bloom-garden-title {
+    text-align: center;
+    color: #4a6e2a;
+    font-size: 1.8rem;
+    padding: 25px 0 15px 0;
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+  }
+  
+  .bloom-garden-bed {
+    position: relative;
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-height: 250px;
+    align-items: flex-end;
+    padding: 40px 30px 60px 30px;
+    z-index: 2;
+  }
+  
+  .bloom-grass-layer {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(124,179,66,0.3) 20%, rgba(124,179,66,0.6) 50%, #7CB342 100%);
+    z-index: 0;
+  }
+  
+  .bloom-bushes {
+    position: absolute;
+    bottom: 40px; left: 0; right: 0;
+    height: 100px;
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  .bloom-bush {
+    position: absolute;
+    bottom: 0;
+    background: radial-gradient(ellipse at 50% 60%, #558B2F, #689F38);
+    border-radius: 50%;
+    box-shadow: inset -5px -5px 10px rgba(0,0,0,0.2), inset 5px 5px 10px rgba(255,255,255,0.1);
+  }
+  
+  .bloom-bush::before,
+  .bloom-bush::after {
+    content: '';
+    position: absolute;
+    background: radial-gradient(ellipse at 50% 60%, #558B2F, #689F38);
+    border-radius: 50%;
+    box-shadow: inset -3px -3px 8px rgba(0,0,0,0.2);
+  }
+  
+  .bloom-bush-left { left: 10px; width: 120px; height: 80px; animation: bushSway 4s ease-in-out infinite; }
+  .bloom-bush-left::before { width: 80px; height: 60px; top: -25px; left: 50px; }
+  .bloom-bush-left::after  { width: 70px; height: 55px; top: -15px; left: 10px; }
+  
+  .bloom-bush-right { right: 10px; width: 130px; height: 85px; animation: bushSway 4.5s ease-in-out infinite; animation-delay: -2s; }
+  .bloom-bush-right::before { width: 90px; height: 65px; top: -28px; right: 55px; }
+  .bloom-bush-right::after  { width: 75px; height: 58px; top: -18px; right: 5px; }
+  
+  .bloom-small-bush {
+    position: absolute;
+    bottom: 10px;
+    background: radial-gradient(ellipse at 50% 60%, #66BB6A, #81C784);
+    border-radius: 50%;
+    box-shadow: inset -3px -3px 6px rgba(0,0,0,0.15);
+  }
+  
+  .bloom-small-bush-1 { left: 25%; width: 50px; height: 35px; animation: bushSway 3.5s ease-in-out infinite; animation-delay: -1s; }
+  .bloom-small-bush-2 { right: 30%; width: 45px; height: 32px; animation: bushSway 3.8s ease-in-out infinite; animation-delay: -2.5s; }
+  
+  @keyframes bushSway {
+    0%, 100% { transform: translateX(0) scale(1); }
+    25%       { transform: translateX(2px) scale(1.02); }
+    75%       { transform: translateX(-2px) scale(0.98); }
+  }
+  
+  .bloom-flowers-container {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+    z-index: 3;
+    position: relative;
+  }
+  
+  .bloom-ground {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 30px;
+    background: linear-gradient(to bottom, #6D4C41, #5D4037);
+    border-bottom-left-radius: 17px;
+    border-bottom-right-radius: 17px;
+    box-shadow: inset 0 3px 6px rgba(0,0,0,0.3);
+  }
+  
+  .bloom-garden-flower {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    animation: growAndBounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    animation-delay: var(--delay, 0s);
+    animation-fill-mode: both;
+    z-index: 4;
+  }
+  
+  @keyframes growAndBounce {
+    0%   { transform: scale(0) translateY(60px) rotate(-10deg); opacity: 0; }
+    60%  { transform: scale(1.15) translateY(-10px) rotate(3deg); opacity: 1; }
+    80%  { transform: scale(0.95) translateY(5px) rotate(-2deg); }
+    100% { transform: scale(1) translateY(0) rotate(0deg); opacity: 1; }
+  }
+  
+  .bloom-garden-flower:hover {
+    transform: translateY(-15px) scale(1.15);
+    filter: drop-shadow(0 10px 20px rgba(255, 193, 7, 0.4));
+  }
+  
+  .bloom-garden-flower svg {
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));
+    animation: gentleSway 3s ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+  }
+  
+  @keyframes gentleSway {
+    0%, 100% { transform: rotate(0deg); }
+    25%       { transform: rotate(2deg); }
+    75%       { transform: rotate(-2deg); }
+  }
+  
+  .bloom-flower-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.98);
+    padding: 10px 15px;
+    border-radius: 10px;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    color: #333;
+    font-weight: 500;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    border: 2px solid #FFD700;
+    margin-bottom: 10px;
+    animation: fadeIn 0.2s ease;
+    z-index: 10;
+  }
+  
+  .bloom-flower-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%; left: 50%;
+    transform: translateX(-50%);
+    border: 8px solid transparent;
+    border-top-color: #FFD700;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(-5px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+  
+  .bloom-empty-garden {
+    width: 100%;
+    text-align: center;
+    padding: 40px;
+    color: #558B2F;
+    font-size: 1.2rem;
+    font-weight: 600;
+    z-index: 5;
+    position: relative;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+  }
+  
+  .bloom-empty-garden p { animation: pulse 2s ease-in-out infinite; }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.7; transform: scale(1.05); }
+  }
+  
+  @media (max-width: 800px) {
+    .bloom-container {
+      width: 100%;
+      padding: 25px;
+    }
+  
+    .bloom-main-content {
+      grid-template-columns: 1fr;
+    }
+  
+    .bloom-todo-section {
+      width: 100%;
+    }
+  
+    .bloom-title {
+      font-size: 2rem;
+    }
+  }
